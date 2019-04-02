@@ -1,13 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import DashboardPage from "./components/DashboardPage";
-import Filters from "./components/Filters";
-import AddEventPage from "./components/AddEventPage";
-import EditEventPage from "./components/EditEventPage";
-import Header from "./components/Header";
-import ReadEventPage from "./components/ReadEventPage";
-import EventItem from "./components/EventItem";
+import { Provider } from "react-redux";
 import configureStore from "./store/configureStore";
+import AppRouter from "./routers/AppRouter";
+// import Filters from "./components/Filters";
+// import EventItem from "./components/EventItem";
 import { addEvent, editEvent, removeEvent } from "./actions/events";
 
 const store = configureStore();
@@ -20,15 +17,9 @@ store.dispatch(removeEvent({ id: "myid" }));
 console.log(store.getState());
 
 const jsx = (
-  <div>
-    <Header />
-    <DashboardPage />
-    <Filters />
-    <AddEventPage />
-    <EditEventPage />
-    <ReadEventPage />
-    <EventItem />
-  </div>
+  <Provider store={store}>
+    <AppRouter />
+  </Provider>
 );
 
 ReactDOM.render(jsx, document.getElementById("app"));
