@@ -1,13 +1,16 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
+import createHistory from "history/createBrowserHistory";
 import DashboardPage from "../components/DashboardPage";
 import AddEventPage from "../components/AddEventPage";
 import EditEventPage from "../components/EditEventPage";
 import ReadEventPage from "../components/ReadEventPage";
 import Header from "../components/Header";
 
+export const history = createHistory();
+
 const AppRouter = () => (
-  <BrowserRouter>
+  <Router history={history}>
     <div>
       <Header />
       <Switch>
@@ -17,7 +20,7 @@ const AppRouter = () => (
         <Route path="/read/:id" component={ReadEventPage} />
       </Switch>
     </div>
-  </BrowserRouter>
+  </Router>
 );
 
 export default AppRouter;

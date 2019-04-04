@@ -6,7 +6,8 @@ export const addEvent = ({
   category = "",
   image = false,
   createdAt = 0,
-  date = 0,
+  startDate = 0,
+  endDate = 0,
   id = "",
 } = {}) => ({
   type: "ADD_EVENT",
@@ -18,7 +19,8 @@ export const addEvent = ({
     category,
     image,
     createdAt,
-    date,
+    startDate,
+    endDate,
     id,
   },
 });
