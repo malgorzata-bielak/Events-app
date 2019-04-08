@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-
 import EventForm from "./EventForm";
 import { addEvent } from "../actions/events";
 
