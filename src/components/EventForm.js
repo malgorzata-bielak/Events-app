@@ -6,54 +6,49 @@ import moment from "moment";
 import uuid from "uuid";
 
 export default class EventForm extends React.Component {
-  constructor(props) {
-    super(props);
+  state = {
+    title: "",
+    description: "",
+    organisator: "",
+    city: "",
+    category: "",
+    image: false,
+    id: uuid(),
+    createdAt: moment(),
+    startDate: moment(),
+    startDateId: "",
+    endDate: moment(),
+    endDateId: "",
+    calendarFocused: null,
+  };
 
-    this.state = {
-      title: "",
-      description: "",
-      organisator: "",
-      city: "",
-      category: "",
-      image: false,
-      id: uuid(),
-      createdAt: moment(),
-      startDate: moment(),
-      startDateId: "",
-      endDate: moment(),
-      endDateId: "",
-      calendarFocused: null,
-    };
-  }
+  onChange = e => {
+    const { value, name } = e.target;
+    this.setState({ [name]: value });
+  };
 
   onTitleChange = e => {
-    const title = e.target.value;
-    this.setState(() => ({ title }));
+    this.onChange(e);
   };
 
   onDescriptionChange = e => {
-    const description = e.target.value;
-    this.setState(() => ({ description }));
+    this.onChange(e);
   };
 
   onOrganisatorChange = e => {
-    const organisator = e.target.value;
-    this.setState(() => ({ organisator }));
+    this.onChange(e);
   };
 
   onCityChange = e => {
-    const city = e.target.value;
-    this.setState(() => ({ city }));
+    this.onChange(e);
   };
 
   onCategoryChange = e => {
-    const category = e.target.value;
-    this.setState(() => ({ category }));
+    this.onChange(e);
   };
 
   onImageChange = e => {
-    const image = e.target.value;
-    this.setState(() => ({ image }));
+    this.onChange(e);
   };
 
   onFocusChange = calendarFocused => {
@@ -82,43 +77,76 @@ export default class EventForm extends React.Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.onSubmit}>
-          <input placeholder="Title" onChange={this.onTitleChange} />
-          <input placeholder="Description" onChange={this.onDescriptionChange} />
-          <input placeholder="Organisator" onChange={this.onOrganisatorChange} />
-          <select value={this.state.city} onChange={this.onCityChange}>
-            <option value="">Select city</option>
-            <option value="cracow">Cracow</option>
-            <option value="wroclaw">Wroclaw</option>
-            <option value="warsaw">Warsaw</option>
-            <option value="poznan">Poznan</option>
-            <option value="gdansk">Gdansk</option>
-          </select>
-          <select value={this.state.category} onChange={this.onCategoryChange}>
-            <option value="">Select category</option>
-            <option value="music">Music</option>
-            <option value="arts">Arts</option>
-            <option value="business">Business</option>
-            <option value="sport">Sport</option>
-            <option value="food">Food</option>
-          </select>
-          <DateRangePicker
-            startDate={this.state.startDate}
-            startDateId={this.state.startDateId}
-            endDate={this.state.endDate}
-            endDateId={this.state.endDateId}
-            onDatesChange={this.onDatesChange}
-            focusedInput={this.state.calendarFocused}
-            onFocusChange={this.onFocusChange}
-            showClearDates
-            numberOfMonths={1}
-            minimumNights={0}
+      <form onSubmit={this.onSubmit}>
+        <label htmlFor="title">
+          Title
+          <input placeholder="Title" name="title" id="title" onChange={this.onTitleChange} />
+        </label>
+
+        <label htmlFor="description">
+          Description
+          <input
+            placeholder="Description"
+            name="description"
+            id="description"
+            onChange={this.onDescriptionChange}
           />
-          <input type="file" accept="image/*" onChange={this.onImageChange} />
-          <button>{!this.props.event ? "Add event" : "Save changes"}</button>
-        </form>
-      </div>
+        </label>
+
+        <label htmlFor="organisator">
+          Organisator
+          <input
+            placeholder="Organisator"
+            name="organisator"
+            id="organisator"
+            onChange={this.onOrganisatorChange}
+          />
+        </label>
+
+        <select name="city" value={this.state.city} onChange={this.onCityChange}>
+          <option value="">Select city</option>
+          <option value="cracow">Cracow</option>
+          <option value="wroclaw">Wroclaw</option>
+          <option value="warsaw">Warsaw</option>
+          <option value="poznan">Poznan</option>
+          <option value="gdansk">Gdansk</option>
+        </select>
+
+        <select name="category" value={this.state.category} onChange={this.onCategoryChange}>
+          <option value="">Select category</option>
+          <option value="music">Music</option>
+          <option value="arts">Arts</option>
+          <option value="business">Business</option>
+          <option value="sport">Sport</option>
+          <option value="food">Food</option>
+        </select>
+
+        <DateRangePicker
+          startDate={this.state.startDate}
+          startDateId={this.state.startDateId}
+          endDate={this.state.endDate}
+          endDateId={this.state.endDateId}
+          onDatesChange={this.onDatesChange}
+          focusedInput={this.state.calendarFocused}
+          onFocusChange={this.onFocusChange}
+          showClearDates
+          numberOfMonths={1}
+          minimumNights={0}
+        />
+
+        <label htmlFor="image">
+          Image
+          <input
+            type="file"
+            name="image"
+            id="date"
+            accept="image/*"
+            onChange={this.onImageChange}
+          />
+        </label>
+
+        <button>{!this.props.event ? "Add event" : "Save changes"}</button>
+      </form>
     );
   }
 }

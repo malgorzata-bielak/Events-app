@@ -31,7 +31,7 @@ export const editEvent = (id, updates) => ({
   updates,
 });
 
-export const removeEvent = ({ id } = {}) => ({
+export const removeEvent = (id = {}) => ({
   type: "REMOVE_EVENT",
   id,
 });

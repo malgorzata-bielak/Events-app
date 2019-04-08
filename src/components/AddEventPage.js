@@ -11,19 +11,14 @@ export class AddEventPage extends React.Component {
 
   render() {
     return (
-      <div>
-        addpage
+      <>
         <EventForm onSubmit={this.onSubmit} />
-      </div>
+      </>
     );
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  addEvent: event => dispatch(addEvent(event)),
-});
-
 export default connect(
   undefined,
-  mapDispatchToProps,
+  { addEvent },
 )(AddEventPage);

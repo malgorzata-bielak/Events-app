@@ -12,6 +12,7 @@ const eventsReducer = (state = eventsReducerDefaultState, action) => {
             ...action.updates,
           };
         }
+        return { ...event };
       });
     case "REMOVE_EVENT":
       return state.filter(event => event.id !== action.id);

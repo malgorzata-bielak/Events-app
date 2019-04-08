@@ -7,8 +7,11 @@ class Filters extends React.Component {
 
   render() {
     return (
-      <div>
-        <input autoFocus placeholder="Search event" />
+      <>
+        <label htmlFor="search">
+          Search
+          <input id="search" autoFocus placeholder="Search event" />
+        </label>
         <select>
           <option>Select city</option>
           <option>Cracow</option>
@@ -30,7 +33,7 @@ class Filters extends React.Component {
           <option>Closest</option>
         </select>
         <button onClick={this.onCreateClick}>Create event</button>
-      </div>
+      </>
     );
   }
 }
