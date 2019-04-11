@@ -6,25 +6,31 @@ import moment from "moment";
 import uuid from "uuid";
 
 export default class EventForm extends React.Component {
-  state = {
-    title: "",
-    description: "",
-    organisator: "",
-    city: "",
-    category: "",
-    image: false,
-    id: uuid(),
-    createdAt: moment(),
-    startDate: moment(),
-    startDateId: "",
-    endDate: moment(),
-    endDateId: "",
-    calendarFocused: null,
-  };
+  constructor(props) {
+    super(props);
+
+    const event = props.event || {};
+
+    this.state = {
+      title: event.title || "",
+      description: event.description || "",
+      organisator: event.organisator || "",
+      city: event.city || "",
+      category: event.category || "",
+      image: event.image || "",
+      id: event.id || uuid(),
+      createdAt: moment(event.createdAt) || moment(),
+      startDate: moment(event.startDate) || moment(),
+      startDateId: "",
+      endDate: moment(event.endDate) || moment(),
+      endDateId: "",
+      calendarFocused: null,
+    };
+  }
 
   onChange = e => {
-    const { value, name } = e.target;
-    this.setState({ [name]: value });
+    const { value, id } = e.target;
+    this.setState({ [id]: value });
   };
 
   onTitleChange = e => {
@@ -80,15 +86,20 @@ export default class EventForm extends React.Component {
       <form onSubmit={this.onSubmit}>
         <label htmlFor="title">
           Title
-          <input placeholder="Title" name="title" id="title" onChange={this.onTitleChange} />
+          <input
+            placeholder="Title"
+            id="title"
+            value={this.state.title}
+            onChange={this.onTitleChange}
+          />
         </label>
 
         <label htmlFor="description">
           Description
           <input
             placeholder="Description"
-            name="description"
             id="description"
+            value={this.state.description}
             onChange={this.onDescriptionChange}
           />
         </label>
@@ -97,28 +108,28 @@ export default class EventForm extends React.Component {
           Organisator
           <input
             placeholder="Organisator"
-            name="organisator"
             id="organisator"
+            value={this.state.organisator}
             onChange={this.onOrganisatorChange}
           />
         </label>
 
-        <select name="city" value={this.state.city} onChange={this.onCityChange}>
+        <select id="city" value={this.state.city} onChange={this.onCityChange}>
           <option value="">Select city</option>
-          <option value="cracow">Cracow</option>
-          <option value="wroclaw">Wroclaw</option>
-          <option value="warsaw">Warsaw</option>
-          <option value="poznan">Poznan</option>
-          <option value="gdansk">Gdansk</option>
+          <option value="Cracow">Cracow</option>
+          <option value="Wroclaw">Wroclaw</option>
+          <option value="Warsaw">Warsaw</option>
+          <option value="Poznan">Poznan</option>
+          <option value="Gdansk">Gdansk</option>
         </select>
 
-        <select name="category" value={this.state.category} onChange={this.onCategoryChange}>
+        <select id="category" value={this.state.category} onChange={this.onCategoryChange}>
           <option value="">Select category</option>
-          <option value="music">Music</option>
-          <option value="arts">Arts</option>
-          <option value="business">Business</option>
-          <option value="sport">Sport</option>
-          <option value="food">Food</option>
+          <option value="Music">Music</option>
+          <option value="Arts">Arts</option>
+          <option value="Business">Business</option>
+          <option value="Sport">Sport</option>
+          <option value="Food">Food</option>
         </select>
 
         <DateRangePicker
@@ -138,9 +149,9 @@ export default class EventForm extends React.Component {
           Image
           <input
             type="file"
-            name="image"
-            id="date"
+            id="image"
             accept="image/*"
+            files={this.state.image}
             onChange={this.onImageChange}
           />
         </label>

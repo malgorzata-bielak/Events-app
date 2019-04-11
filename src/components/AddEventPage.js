@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-
 import EventForm from "./EventForm";
 import { addEvent } from "../actions/events";
 
@@ -11,11 +10,7 @@ export class AddEventPage extends React.Component {
   };
 
   render() {
-    return (
-      <>
-        <EventForm onSubmit={this.onSubmit} />
-      </>
-    );
+    return <EventForm onSubmit={this.onSubmit} />;
   }
 }
 

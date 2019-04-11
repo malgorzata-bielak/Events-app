@@ -1,28 +1,6 @@
-export const addEvent = ({
-  title = "",
-  description = "",
-  organisator = "",
-  city = "",
-  category = "",
-  image = false,
-  createdAt = 0,
-  startDate = 0,
-  endDate = 0,
-  id = "",
-} = {}) => ({
+export const addEvent = event => ({
   type: "ADD_EVENT",
-  event: {
-    title,
-    description,
-    organisator,
-    city,
-    category,
-    image,
-    createdAt,
-    startDate,
-    endDate,
-    id,
-  },
+  event,
 });
 
 export const editEvent = (id, updates) => ({
