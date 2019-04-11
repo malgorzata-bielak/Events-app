@@ -9,26 +9,28 @@ export default class EventForm extends React.Component {
   constructor(props) {
     super(props);
 
+    const event = props.event || {};
+
     this.state = {
-      title: props.event ? props.event.title : "",
-      description: props.event ? props.event.description : "",
-      organisator: props.event ? props.event.organisator : "",
-      city: props.event ? props.event.city : "",
-      category: props.event ? props.event.category : "",
-      image: props.event ? props.event.image : "",
-      id: props.event ? props.event.id : uuid(),
-      createdAt: props.event ? moment(props.event.createdAt) : moment(),
-      startDate: props.event ? moment(props.event.startDate) : moment(),
+      title: event.title || "",
+      description: event.description || "",
+      organisator: event.organisator || "",
+      city: event.city || "",
+      category: event.category || "",
+      image: event.image || "",
+      id: event.id || uuid(),
+      createdAt: moment(event.createdAt) || moment(),
+      startDate: moment(event.startDate) || moment(),
       startDateId: "",
-      endDate: props.event ? moment(props.event.endDate) : moment(),
+      endDate: moment(event.endDate) || moment(),
       endDateId: "",
       calendarFocused: null,
     };
   }
 
   onChange = e => {
-    const { value, name } = e.target;
-    this.setState({ [name]: value });
+    const { value, id } = e.target;
+    this.setState({ [id]: value });
   };
 
   onTitleChange = e => {
@@ -86,7 +88,6 @@ export default class EventForm extends React.Component {
           Title
           <input
             placeholder="Title"
-            name="title"
             id="title"
             value={this.state.title}
             onChange={this.onTitleChange}
@@ -97,7 +98,6 @@ export default class EventForm extends React.Component {
           Description
           <input
             placeholder="Description"
-            name="description"
             id="description"
             value={this.state.description}
             onChange={this.onDescriptionChange}
@@ -108,14 +108,13 @@ export default class EventForm extends React.Component {
           Organisator
           <input
             placeholder="Organisator"
-            name="organisator"
             id="organisator"
             value={this.state.organisator}
             onChange={this.onOrganisatorChange}
           />
         </label>
 
-        <select name="city" value={this.state.city} onChange={this.onCityChange}>
+        <select id="city" value={this.state.city} onChange={this.onCityChange}>
           <option value="">Select city</option>
           <option value="Cracow">Cracow</option>
           <option value="Wroclaw">Wroclaw</option>
@@ -124,7 +123,7 @@ export default class EventForm extends React.Component {
           <option value="Gdansk">Gdansk</option>
         </select>
 
-        <select name="category" value={this.state.category} onChange={this.onCategoryChange}>
+        <select id="category" value={this.state.category} onChange={this.onCategoryChange}>
           <option value="">Select category</option>
           <option value="Music">Music</option>
           <option value="Arts">Arts</option>
@@ -150,8 +149,7 @@ export default class EventForm extends React.Component {
           Image
           <input
             type="file"
-            name="image"
-            id="date"
+            id="image"
             accept="image/*"
             files={this.state.image}
             onChange={this.onImageChange}
