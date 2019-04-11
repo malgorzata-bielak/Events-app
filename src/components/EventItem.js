@@ -3,8 +3,8 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 
 const EventItem = ({ title, image, startDate, endDate, organisator, city, category, id }) => {
-  const start = moment(startDate).format("d MMM");
-  const end = moment(endDate).format("d MMM");
+  const start = moment(startDate).format("D MMM");
+  const end = moment(endDate).format("D MMM");
 
   return (
     <>

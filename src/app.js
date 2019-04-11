@@ -7,8 +7,8 @@ import { addEvent } from "./actions/events";
 
 const store = configureStore();
 
-store.dispatch(addEvent({ title: "testing", id: "123" }));
-console.log(store.getState());
+// store.dispatch(addEvent({ title: "testing", id: "123" }));
+// console.log(store.getState());
 
 const jsx = (
   <Provider store={store}>
