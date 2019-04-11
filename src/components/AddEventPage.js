@@ -10,11 +10,7 @@ export class AddEventPage extends React.Component {
   };
 
   render() {
-    return (
-      <>
-        <EventForm onSubmit={this.onSubmit} />
-      </>
-    );
+    return <EventForm onSubmit={this.onSubmit} />;
   }
 }
 

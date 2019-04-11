@@ -7,16 +7,14 @@ const EventItem = ({ title, image, startDate, endDate, organisator, city, catego
   const end = moment(endDate).format("D MMM");
 
   return (
-    <>
-      <Link to={`edit/${id}`}>
-        <div>{image}</div>
-        <h1>{title}</h1>
-        <p>{startDate === endDate ? start : `${start} - ${end}`}</p>
-        <p>{organisator}</p>
-        <p>{city}</p>
-        <p>{category}</p>
-      </Link>
-    </>
+    <Link to={`edit/${id}`}>
+      <div>{image}</div>
+      <h1>{title}</h1>
+      <p>{startDate === endDate ? start : `${start} - ${end}`}</p>
+      <p>{organisator}</p>
+      <p>{city}</p>
+      <p>{category}</p>
+    </Link>
   );
 };
 
