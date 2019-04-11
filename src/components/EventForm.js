@@ -33,30 +33,6 @@ export default class EventForm extends React.Component {
     this.setState({ [id]: value });
   };
 
-  onTitleChange = e => {
-    this.onChange(e);
-  };
-
-  onDescriptionChange = e => {
-    this.onChange(e);
-  };
-
-  onOrganisatorChange = e => {
-    this.onChange(e);
-  };
-
-  onCityChange = e => {
-    this.onChange(e);
-  };
-
-  onCategoryChange = e => {
-    this.onChange(e);
-  };
-
-  onImageChange = e => {
-    this.onChange(e);
-  };
-
   onFocusChange = calendarFocused => {
     this.setState(() => ({ calendarFocused }));
   };
@@ -86,12 +62,7 @@ export default class EventForm extends React.Component {
       <form onSubmit={this.onSubmit}>
         <label htmlFor="title">
           Title
-          <input
-            placeholder="Title"
-            id="title"
-            value={this.state.title}
-            onChange={this.onTitleChange}
-          />
+          <input placeholder="Title" id="title" value={this.state.title} onChange={this.onChange} />
         </label>
 
         <label htmlFor="description">
@@ -100,7 +71,7 @@ export default class EventForm extends React.Component {
             placeholder="Description"
             id="description"
             value={this.state.description}
-            onChange={this.onDescriptionChange}
+            onChange={this.onChange}
           />
         </label>
 
@@ -110,11 +81,11 @@ export default class EventForm extends React.Component {
             placeholder="Organisator"
             id="organisator"
             value={this.state.organisator}
-            onChange={this.onOrganisatorChange}
+            onChange={this.onChange}
           />
         </label>
 
-        <select id="city" value={this.state.city} onChange={this.onCityChange}>
+        <select id="city" value={this.state.city} onChange={this.onChange}>
           <option value="">Select city</option>
           <option value="Cracow">Cracow</option>
           <option value="Wroclaw">Wroclaw</option>
@@ -123,7 +94,7 @@ export default class EventForm extends React.Component {
           <option value="Gdansk">Gdansk</option>
         </select>
 
-        <select id="category" value={this.state.category} onChange={this.onCategoryChange}>
+        <select id="category" value={this.state.category} onChange={this.onChange}>
           <option value="">Select category</option>
           <option value="Music">Music</option>
           <option value="Arts">Arts</option>
@@ -152,7 +123,7 @@ export default class EventForm extends React.Component {
             id="image"
             accept="image/*"
             files={this.state.image}
-            onChange={this.onImageChange}
+            onChange={this.onChange}
           />
         </label>
 

@@ -12,7 +12,10 @@
     "jest": true
   },
   "rules": {
-    "react/destructuring-assignment": 0,
+    "arrow-body-style": [1, "as-needed"],
+    "array-callback-return": 0,
+    "consistent-return": 0,
+    "jsx-a11y/no-autofocus": 0,
     "no-unused-vars": [
       "error",
       {
@@ -20,13 +23,11 @@
         "args": "none"
       }
     ],
-    "react/jsx-filename-extension": 0,
-    "import/no-named-as-default": 0,
     "react/button-has-type": 0,
-    "jsx-a11y/no-autofocus": 0,
+    "react/destructuring-assignment": 0,
+    "react/jsx-filename-extension": 0,
     "react/jsx-one-expression-per-line": 0,
     "react/no-unescaped-entities": 0,
-    "array-callback-return": 0,
-    "consistent-return": 0
+    "import/no-named-as-default": 0
   }
 }

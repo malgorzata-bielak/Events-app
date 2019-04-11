@@ -1,12 +1,15 @@
 import moment from "moment";
 
-const visibleEvents = (events, { title, city, category, sortBy }) => {
-  return events
+const visibleEvents = (events, { title, city, category, sortBy }) =>
+  events
     .filter(event => {
       const isAvailable = moment().isSameOrBefore(event.endDate, "day");
       const titleMatch = event.title.toLowerCase().includes(title.toLowerCase());
-      const cityMatch = city ? event.city === city : event;
-      const categoryMatch = category ? event.category === category : event;
+      const cityMatch = city ? event.city.toLowerCase() === city.toLowerCase() : event;
+      const categoryMatch = category
+        ? event.category.toLowerCase() === category.toLowerCase()
+        : event;
+
       return isAvailable && titleMatch && cityMatch && categoryMatch;
     })
     .sort((a, b) => {
@@ -17,6 +20,5 @@ const visibleEvents = (events, { title, city, category, sortBy }) => {
         return a.startDate < b.startDate ? -1 : 1;
       }
     });
-};
 
 export default visibleEvents;

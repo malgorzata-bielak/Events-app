@@ -26,6 +26,7 @@ class Filters extends React.Component {
     if (sortBy === "newest") {
       this.props.sortByNewest(sortBy);
     }
+
     if (sortBy === "closest") {
       this.props.sortByClosest(sortBy);
     }
@@ -49,19 +50,19 @@ class Filters extends React.Component {
         </label>
         <select onChange={this.onCityFilterChange}>
           <option value="">Select city</option>
-          <option value="Cracow">Cracow</option>
-          <option value="Wroclaw">Wroclaw</option>
-          <option value="Warsaw">Warsaw</option>
-          <option value="Poznan">Poznan</option>
-          <option value="Gdansk">Gdansk</option>
+          <option value="cracow">Cracow</option>
+          <option value="wroclaw">Wroclaw</option>
+          <option value="warsaw">Warsaw</option>
+          <option value="poznan">Poznan</option>
+          <option value="gdansk">Gdansk</option>
         </select>
         <select onChange={this.onCategoryFilterChange}>
           <option value="">Select category</option>
-          <option value="Music">Music</option>
-          <option value="Arts">Arts</option>
-          <option value="Business">Business</option>
-          <option value="Sport">Sport</option>
-          <option value="Food">Food</option>
+          <option value="music">Music</option>
+          <option value="arts">Arts</option>
+          <option value="business">Business</option>
+          <option value="sport">Sport</option>
+          <option value="food">Food</option>
         </select>
         <select onChange={this.onSortByChange}>
           <option value="">Sort by:</option>
@@ -74,8 +75,8 @@ class Filters extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  filters: state.filters,
+const mapStateToProps = ({ filters }) => ({
+  filters,
 });
 
 export default connect(
