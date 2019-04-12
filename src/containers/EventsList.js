@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import EventItem from "./EventItem";
+import PropTypes from "prop-types";
+
+import EventItem from "../components/EventItem";
 import visibleEvents from "../selectors/visibleEvents";
 
 const EventsList = ({ events }) => (
@@ -16,5 +18,9 @@ const EventsList = ({ events }) => (
 const mapStateToProps = state => ({
   events: visibleEvents(state.events, state.filters),
 });
+
+EventsList.propTypes = {
+  events: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default connect(mapStateToProps)(EventsList);

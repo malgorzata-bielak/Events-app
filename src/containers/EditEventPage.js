@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import EventForm from "./EventForm";
+
+import EventForm from "../components/EventForm";
 import { editEvent, removeEvent } from "../actions/events";
 
 class EditEventPage extends React.Component {

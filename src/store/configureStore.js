@@ -1,4 +1,5 @@
 import { createStore, combineReducers } from "redux";
+
 import eventsReducer from "../reducers/events";
 import filtersReducer from "../reducers/filters";
 

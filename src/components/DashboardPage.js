@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Filters from "./Filters";
-import EventsList from "./EventsList";
+
+import Filters from "../containers/Filters";
+import EventsList from "../containers/EventsList";
 
 const DashboardPage = props => (
   <>
