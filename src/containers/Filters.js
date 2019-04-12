@@ -9,6 +9,7 @@ import {
   sortByNewest,
   sortByClosest,
 } from "../actions/filters";
+import { historyPropTypes } from "../common/models";
 
 class Filters extends React.Component {
   onTitleFilterChange = e => {
@@ -87,9 +88,7 @@ Filters.propTypes = {
   searchByCategory: PropTypes.func.isRequired,
   sortByNewest: PropTypes.func.isRequired,
   sortByClosest: PropTypes.func.isRequired,
-  history: PropTypes.shape({
-    push: PropTypes.func,
-  }).isRequired,
+  ...historyPropTypes,
 };
 
 export default connect(

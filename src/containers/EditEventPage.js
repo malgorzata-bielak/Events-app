@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 
 import EventForm from "../components/EventForm";
 import { editEvent, removeEvent } from "../actions/events";
+import { historyPropTypes } from "../common/models";
 
 class EditEventPage extends React.Component {
   onSubmit = event => {
@@ -36,9 +37,7 @@ EditEventPage.propTypes = {
     id: PropTypes.string,
   }).isRequired,
   removeEvent: PropTypes.func.isRequired,
-  history: PropTypes.shape({
-    push: PropTypes.func,
-  }).isRequired,
+  ...historyPropTypes,
 };
 
 export default connect(

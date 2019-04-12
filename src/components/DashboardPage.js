@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { historyPropTypes } from "../common/models";
 
 import Filters from "../containers/Filters";
 import EventsList from "../containers/EventsList";
@@ -12,9 +12,7 @@ const DashboardPage = props => (
 );
 
 DashboardPage.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func,
-  }).isRequired,
+  ...historyPropTypes,
 };
 
 export default DashboardPage;

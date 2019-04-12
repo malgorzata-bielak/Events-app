@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 
 import EventItem from "../components/EventItem";
 import visibleEvents from "../selectors/visibleEvents";
+import { eventPropTypes } from "../common/models";
 
 const EventsList = ({ events }) => (
   <>
@@ -20,7 +21,7 @@ const mapStateToProps = state => ({
 });
 
 EventsList.propTypes = {
-  events: PropTypes.arrayOf(PropTypes.object).isRequired,
+  events: PropTypes.arrayOf(eventPropTypes.event).isRequired,
 };
 
 export default connect(mapStateToProps)(EventsList);
