@@ -1,5 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
+
 import {
   searchByTitle,
   searchByCity,
@@ -7,6 +9,7 @@ import {
   sortByNewest,
   sortByClosest,
 } from "../actions/filters";
+import { historyPropTypes } from "../common/models";
 
 class Filters extends React.Component {
   onTitleFilterChange = e => {
@@ -78,6 +81,15 @@ class Filters extends React.Component {
 const mapStateToProps = ({ filters }) => ({
   filters,
 });
+
+Filters.propTypes = {
+  searchByTitle: PropTypes.func.isRequired,
+  searchByCity: PropTypes.func.isRequired,
+  searchByCategory: PropTypes.func.isRequired,
+  sortByNewest: PropTypes.func.isRequired,
+  sortByClosest: PropTypes.func.isRequired,
+  ...historyPropTypes,
+};
 
 export default connect(
   mapStateToProps,

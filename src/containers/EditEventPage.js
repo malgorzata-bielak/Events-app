@@ -1,7 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import EventForm from "./EventForm";
+import PropTypes from "prop-types";
+
+import EventForm from "../components/EventForm";
 import { editEvent, removeEvent } from "../actions/events";
+import { historyPropTypes } from "../common/models";
 
 class EditEventPage extends React.Component {
   onSubmit = event => {
@@ -27,6 +30,15 @@ class EditEventPage extends React.Component {
 const mapStateToProps = (state, props) => ({
   event: state.events.find(event => event.id === props.match.params.id),
 });
+
+EditEventPage.propTypes = {
+  editEvent: PropTypes.func.isRequired,
+  event: PropTypes.shape({
+    id: PropTypes.string,
+  }).isRequired,
+  removeEvent: PropTypes.func.isRequired,
+  ...historyPropTypes,
+};
 
 export default connect(
   mapStateToProps,

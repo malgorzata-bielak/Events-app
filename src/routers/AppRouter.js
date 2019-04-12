@@ -1,11 +1,12 @@
 import React from "react";
 import { Router, Route, Switch } from "react-router-dom";
 import { createBrowserHistory } from "history";
-import DashboardPage from "../components/DashboardPage";
-import AddEventPage from "../components/AddEventPage";
-import EditEventPage from "../components/EditEventPage";
-import ReadEventPage from "../components/ReadEventPage";
+
 import Header from "../components/Header";
+import DashboardPage from "../components/DashboardPage";
+import AddEventPage from "../containers/AddEventPage";
+import EditEventPage from "../containers/EditEventPage";
+import ReadEventPage from "../components/ReadEventPage";
 
 export const history = createBrowserHistory();
 

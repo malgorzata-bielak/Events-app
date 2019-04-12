@@ -1,6 +1,7 @@
 import React from "react";
-import moment from "moment";
 import { Link } from "react-router-dom";
+import moment from "moment";
+import PropTypes from "prop-types";
 
 const EventItem = ({ title, image, startDate, endDate, organisator, city, category, id }) => {
   const start = moment(startDate).format("D MMM");
@@ -16,6 +17,17 @@ const EventItem = ({ title, image, startDate, endDate, organisator, city, catego
       <p>{category}</p>
     </Link>
   );
+};
+
+EventItem.propTypes = {
+  title: PropTypes.string.isRequired,
+  organisator: PropTypes.string.isRequired,
+  city: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+  startDate: PropTypes.number.isRequired,
+  endDate: PropTypes.number.isRequired,
+  image: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export default EventItem;

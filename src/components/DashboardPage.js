@@ -1,6 +1,8 @@
 import React from "react";
-import Filters from "./Filters";
-import EventsList from "./EventsList";
+import { historyPropTypes } from "../common/models";
+
+import Filters from "../containers/Filters";
+import EventsList from "../containers/EventsList";
 
 const DashboardPage = props => (
   <>
@@ -8,5 +10,9 @@ const DashboardPage = props => (
     <EventsList />
   </>
 );
+
+DashboardPage.propTypes = {
+  ...historyPropTypes,
+};
 
 export default DashboardPage;

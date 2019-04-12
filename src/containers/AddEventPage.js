@@ -1,7 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import EventForm from "./EventForm";
+import PropTypes from "prop-types";
+
+import EventForm from "../components/EventForm";
 import { addEvent } from "../actions/events";
+import { historyPropTypes } from "../common/models";
 
 export class AddEventPage extends React.Component {
   onSubmit = event => {
@@ -13,6 +16,11 @@ export class AddEventPage extends React.Component {
     return <EventForm onSubmit={this.onSubmit} />;
   }
 }
+
+AddEventPage.propTypes = {
+  addEvent: PropTypes.func.isRequired,
+  ...historyPropTypes,
+};
 
 export default connect(
   undefined,

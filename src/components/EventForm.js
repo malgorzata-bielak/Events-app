@@ -4,12 +4,14 @@ import "react-dates/lib/css/_datepicker.css";
 import { DateRangePicker } from "react-dates";
 import moment from "moment";
 import uuid from "uuid";
+import PropTypes from "prop-types";
+import { eventPropTypes } from "../common/models";
 
 export default class EventForm extends React.Component {
   constructor(props) {
     super(props);
 
-    const event = props.event || {};
+    const { event } = props;
 
     this.state = {
       title: event.title || "",
@@ -132,3 +134,12 @@ export default class EventForm extends React.Component {
     );
   }
 }
+
+EventForm.defaultProps = {
+  event: {}, // eslint-disable-line
+};
+
+EventForm.propTypes = {
+  ...eventPropTypes,
+  onSubmit: PropTypes.func.isRequired,
+};
