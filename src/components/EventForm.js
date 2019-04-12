@@ -4,8 +4,13 @@ import "react-dates/lib/css/_datepicker.css";
 import { DateRangePicker } from "react-dates";
 import moment from "moment";
 import uuid from "uuid";
+import PropTypes from "prop-types";
 
 export default class EventForm extends React.Component {
+  static defaultProps = {
+    event: undefined,
+  };
+
   constructor(props) {
     super(props);
 
@@ -132,3 +137,19 @@ export default class EventForm extends React.Component {
     );
   }
 }
+
+EventForm.propTypes = {
+  event: PropTypes.shape({
+    title: PropTypes.string,
+    description: PropTypes.string,
+    organisator: PropTypes.string,
+    city: PropTypes.string,
+    category: PropTypes.string,
+    startDate: PropTypes.number,
+    endDate: PropTypes.number,
+    image: PropTypes.string,
+    createdAt: PropTypes.number,
+    id: PropTypes.string,
+  }),
+  onSubmit: PropTypes.func.isRequired,
+};

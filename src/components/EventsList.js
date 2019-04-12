@@ -5,9 +5,11 @@ import visibleEvents from "../selectors/visibleEvents";
 
 const EventsList = ({ events }) => (
   <>
-    {events.map(event => (
-      <EventItem key={event.id} {...event} />
-    ))}
+    {events.length === 0 ? (
+      <p>No events</p>
+    ) : (
+      events.map(event => <EventItem key={event.id} {...event} />)
+    )}
   </>
 );
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import EventForm from "./EventForm";
 import { addEvent } from "../actions/events";
 
@@ -13,6 +14,13 @@ export class AddEventPage extends React.Component {
     return <EventForm onSubmit={this.onSubmit} />;
   }
 }
+
+AddEventPage.propTypes = {
+  addEvent: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
 
 export default connect(
   undefined,
