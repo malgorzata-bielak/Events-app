@@ -9,7 +9,14 @@ const EventItem = ({ title, image, startDate, endDate, organisator, city, catego
 
   return (
     <Link to={`edit/${id}`}>
-      <div>{image}</div>
+      {image ? (
+        <div>
+          <img src={image} alt="Event" />
+        </div>
+      ) : (
+        <div />
+      )}
+
       <h1>{title}</h1>
       <p>{startDate === endDate ? start : `${start} - ${end}`}</p>
       <p>{organisator}</p>
