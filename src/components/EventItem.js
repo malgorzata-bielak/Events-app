@@ -18,7 +18,7 @@ const EventItem = ({ title, image, startDate, endDate, organisator, city, catego
       )}
 
       <h1>{title}</h1>
-      <p>{startDate === endDate ? start : `${start} - ${end}`}</p>
+      <p>{start === end ? start : `${start} - ${end}`}</p>
       <p>{organisator}</p>
       <p>{city}</p>
       <p>{category}</p>
