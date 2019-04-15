@@ -1,5 +1,27 @@
 import database from "../firebase/firebase";
 
+export const setEvents = events => ({
+  type: "SET_EVENTS",
+  events,
+});
+
+export const startSetEvents = () => (dispatch, _getState) => {
+  database
+    .ref("events")
+    .once("value")
+    .then(snapshot => {
+      const events = [];
+
+      snapshot.forEach(childSnapshot => {
+        events.push({
+          id: childSnapshot.key,
+          ...childSnapshot.val(),
+        });
+      });
+      dispatch(setEvents(events));
+    });
+};
+
 export const addEvent = event => ({
   type: "ADD_EVENT",
   event,
