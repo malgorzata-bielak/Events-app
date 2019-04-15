@@ -20,6 +20,15 @@ export const editEvent = (id, updates) => ({
   updates,
 });
 
+export const startEditEvent = (id, updates) => (dispatch, _getState) => {
+  database
+    .ref(`events/${id}`)
+    .update(updates)
+    .then(() => {
+      dispatch(editEvent(id, updates));
+    });
+};
+
 export const removeEvent = (id = {}) => ({
   type: "REMOVE_EVENT",
   id,
