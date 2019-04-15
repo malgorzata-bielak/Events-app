@@ -27,11 +27,11 @@ const mapStateToProps = (state, props) => ({
 });
 
 EditEventPage.propTypes = {
+  ...historyPropTypes,
   editEvent: PropTypes.func.isRequired,
   event: PropTypes.shape({
     id: PropTypes.string,
   }).isRequired,
-  ...historyPropTypes,
 };
 
 export default connect(

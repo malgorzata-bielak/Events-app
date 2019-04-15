@@ -83,12 +83,12 @@ const mapStateToProps = ({ filters }) => ({
 });
 
 Filters.propTypes = {
+  ...historyPropTypes,
   searchByTitle: PropTypes.func.isRequired,
   searchByCity: PropTypes.func.isRequired,
   searchByCategory: PropTypes.func.isRequired,
   sortByNewest: PropTypes.func.isRequired,
   sortByClosest: PropTypes.func.isRequired,
-  ...historyPropTypes,
 };
 
 export default connect(

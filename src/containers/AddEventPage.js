@@ -18,8 +18,8 @@ export class AddEventPage extends React.Component {
 }
 
 AddEventPage.propTypes = {
-  addEvent: PropTypes.func.isRequired,
   ...historyPropTypes,
+  addEvent: PropTypes.func.isRequired,
 };
 
 export default connect(
