@@ -3,7 +3,6 @@ import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
 import { DateRangePicker } from "react-dates";
 import moment from "moment";
-import uuid from "uuid";
 import PropTypes from "prop-types";
 import { eventPropTypes } from "../common/models";
 
@@ -21,7 +20,6 @@ export default class EventForm extends React.Component {
       category: event.category || "",
       image: event.image || "",
       imageName: event.imageName || "",
-      id: event.id || uuid(),
       createdAt: moment(event.createdAt) || moment(),
       startDate: moment(event.startDate) || moment(),
       startDateId: "",
@@ -67,7 +65,6 @@ export default class EventForm extends React.Component {
       image: this.state.image,
       imageName: this.state.imageName,
       createdAt: this.state.createdAt.valueOf(),
-      id: this.state.id,
     });
   };
 

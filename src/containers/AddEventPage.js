@@ -3,12 +3,12 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import EventForm from "../components/EventForm";
-import { addEvent } from "../actions/events";
+import { startAddEvent } from "../actions/events";
 import { historyPropTypes } from "../common/models";
 
 export class AddEventPage extends React.Component {
   onSubmit = event => {
-    this.props.addEvent(event);
+    this.props.startAddEvent(event);
     this.props.history.push("/");
   };
 
@@ -19,10 +19,10 @@ export class AddEventPage extends React.Component {
 
 AddEventPage.propTypes = {
   ...historyPropTypes,
-  addEvent: PropTypes.func.isRequired,
+  startAddEvent: PropTypes.func.isRequired,
 };
 
 export default connect(
   undefined,
-  { addEvent },
+  { startAddEvent },
 )(AddEventPage);
