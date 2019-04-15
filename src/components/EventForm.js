@@ -55,15 +55,9 @@ export default class EventForm extends React.Component {
   onSubmit = e => {
     e.preventDefault();
     this.props.onSubmit({
-      title: this.state.title,
-      description: this.state.description,
-      organisator: this.state.organisator,
-      city: this.state.city,
-      category: this.state.category,
+      ...this.state,
       startDate: this.state.startDate.valueOf(),
       endDate: this.state.endDate.valueOf(),
-      image: this.state.image,
-      imageName: this.state.imageName,
       createdAt: this.state.createdAt.valueOf(),
     });
   };

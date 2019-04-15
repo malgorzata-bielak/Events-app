@@ -10,14 +10,14 @@ import { historyPropTypes } from "../common/models";
 class EditEventPage extends React.Component {
   onSubmit = event => {
     this.props.startEditEvent(this.props.event.id, event);
-    this.props.history.push("/");
+    this.props.history.push("/dashboard");
   };
 
   render() {
     return this.props.event ? (
       <EventForm event={this.props.event} onSubmit={this.onSubmit} />
     ) : (
-      <Redirect to="/" />
+      <Redirect to="/dashboard" />
     );
   }
 }

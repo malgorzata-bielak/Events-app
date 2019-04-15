@@ -13,7 +13,7 @@ class ReadEventPage extends React.Component {
 
   onRemoveClick = () => {
     this.props.startRemoveEvent(this.props.event.id);
-    this.props.history.push("/");
+    this.props.history.push("/dashboard");
   };
 
   render() {
