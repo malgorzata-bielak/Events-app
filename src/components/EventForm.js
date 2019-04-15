@@ -20,6 +20,7 @@ export default class EventForm extends React.Component {
       city: event.city || "",
       category: event.category || "",
       image: event.image || "",
+      imageName: event.imageName || "",
       id: event.id || uuid(),
       createdAt: moment(event.createdAt) || moment(),
       startDate: moment(event.startDate) || moment(),
@@ -33,6 +34,16 @@ export default class EventForm extends React.Component {
   onChange = e => {
     const { value, id } = e.target;
     this.setState({ [id]: value });
+  };
+
+  onImageChange = e => {
+    const { files } = e.target;
+    const localImageUrl = window.URL.createObjectURL(files[0]);
+    this.setState({ image: localImageUrl, imageName: files[0].name });
+  };
+
+  onRemoveImageClick = () => {
+    this.setState({ image: "", imageName: "" });
   };
 
   onFocusChange = calendarFocused => {
@@ -54,6 +65,7 @@ export default class EventForm extends React.Component {
       startDate: this.state.startDate.valueOf(),
       endDate: this.state.endDate.valueOf(),
       image: this.state.image,
+      imageName: this.state.imageName,
       createdAt: this.state.createdAt.valueOf(),
       id: this.state.id,
     });
@@ -117,29 +129,36 @@ export default class EventForm extends React.Component {
           numberOfMonths={1}
           minimumNights={0}
         />
+        {this.state.image === "" ? (
+          <label htmlFor="image">
+            Image
+            <input
+              type="file"
+              id="image"
+              accept="image/*"
+              files={this.state.image}
+              onChange={this.onImageChange}
+            />
+          </label>
+        ) : (
+          <>
+            <p>Image</p>
+            <p>{this.state.imageName}</p>
+            <button onClick={this.onRemoveImageClick}>Remove image</button>
+          </>
+        )}
 
-        <label htmlFor="image">
-          Image
-          <input
-            type="file"
-            id="image"
-            accept="image/*"
-            files={this.state.image}
-            onChange={this.onChange}
-          />
-        </label>
-
-        <button>{!this.props.event ? "Add event" : "Save changes"}</button>
+        <button>{!this.props.event.id ? "Add event" : "Save changes"}</button>
       </form>
     );
   }
 }
 
 EventForm.defaultProps = {
-  event: {}, // eslint-disable-line
+  event: {},
 };
 
 EventForm.propTypes = {
-  ...eventPropTypes,
+  event: eventPropTypes.event,
   onSubmit: PropTypes.func.isRequired,
 };

@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import EventForm from "../components/EventForm";
@@ -20,8 +21,14 @@ class EditEventPage extends React.Component {
   render() {
     return (
       <>
-        <EventForm event={this.props.event} onSubmit={this.onSubmit} />
-        <button onClick={this.onRemoveClick}>Remove event</button>
+        {this.props.event ? (
+          <>
+            <EventForm event={this.props.event} onSubmit={this.onSubmit} />
+            <button onClick={this.onRemoveClick}>Remove event</button>{" "}
+          </>
+        ) : (
+          <Redirect to="/" />
+        )}
       </>
     );
   }
