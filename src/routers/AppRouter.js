@@ -6,7 +6,7 @@ import Header from "../components/Header";
 import DashboardPage from "../components/DashboardPage";
 import AddEventPage from "../containers/AddEventPage";
 import EditEventPage from "../containers/EditEventPage";
-import ReadEventPage from "../components/ReadEventPage";
+import ReadEventPage from "../containers/ReadEventPage";
 
 export const history = createBrowserHistory();
 

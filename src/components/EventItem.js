@@ -8,16 +8,13 @@ const EventItem = ({ title, image, startDate, endDate, organisator, city, catego
   const end = moment(endDate).format("D MMM");
 
   return (
-    <Link to={`edit/${id}`}>
+    <Link to={`read/${id}`}>
       {image ? (
-        <div>
-          <img src={image} alt="Event" />
-        </div>
+        <img src={image} alt="Event" />
       ) : (
-        <div />
+        <img src="/images/no-photo-available.png" alt="Not available" />
       )}
-
-      <h1>{title}</h1>
+      <h2>{title}</h2>
       <p>{start === end ? start : `${start} - ${end}`}</p>
       <p>{organisator}</p>
       <p>{city}</p>
