@@ -33,3 +33,12 @@ export const removeEvent = (id = {}) => ({
   type: "REMOVE_EVENT",
   id,
 });
+
+export const startRemoveEvent = id => (dispatch, _getState) => {
+  database
+    .ref(`events/${id}`)
+    .remove()
+    .then(() => {
+      dispatch(removeEvent(id));
+    });
+};
