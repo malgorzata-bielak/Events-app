@@ -15,7 +15,7 @@ export const eventPropTypes = {
     category: PropTypes.string,
     startDate: PropTypes.number,
     endDate: PropTypes.number,
-    image: PropTypes.string,
+    imageUrl: PropTypes.string,
     createdAt: PropTypes.number,
     id: PropTypes.string,
   }),

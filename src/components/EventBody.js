@@ -2,14 +2,14 @@ import React from "react";
 import moment from "moment";
 import PropTypes from "prop-types";
 
-const EventBody = ({ image, title, startDate, endDate, organisator, city, category }) => {
+const EventBody = ({ imageUrl, title, startDate, endDate, organisator, city, category }) => {
   const start = moment(startDate).format("D MMM");
   const end = moment(endDate).format("D MMM");
 
   return (
     <>
-      {image ? (
-        <img src={image} alt={title || "Event"} />
+      {imageUrl ? (
+        <img src={imageUrl} alt={title || "Event"} />
       ) : (
         <img src="/images/no-photo-available.png" alt="Not available" />
       )}
@@ -29,7 +29,7 @@ EventBody.propTypes = {
   category: PropTypes.string.isRequired,
   startDate: PropTypes.number.isRequired,
   endDate: PropTypes.number.isRequired,
-  image: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string.isRequired,
 };
 
 export default EventBody;

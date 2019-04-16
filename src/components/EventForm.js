@@ -4,7 +4,9 @@ import "react-dates/lib/css/_datepicker.css";
 import { DateRangePicker } from "react-dates";
 import moment from "moment";
 import PropTypes from "prop-types";
+
 import { eventPropTypes } from "../common/models";
+import { storage } from "../firebase/firebase";
 
 export default class EventForm extends React.Component {
   constructor(props) {
@@ -18,7 +20,8 @@ export default class EventForm extends React.Component {
       organisator: event.organisator || "",
       city: event.city || "",
       category: event.category || "",
-      image: event.image || "",
+      imageUrl: event.imageUrl || "",
+      imageFile: event.imageFile || "",
       imageName: event.imageName || "",
       createdAt: moment(event.createdAt) || moment(),
       startDate: moment(event.startDate) || moment(),
@@ -34,14 +37,42 @@ export default class EventForm extends React.Component {
     this.setState({ [id]: value });
   };
 
-  onImageChange = e => {
-    const { files } = e.target;
-    const localImageUrl = window.URL.createObjectURL(files[0]);
-    this.setState({ image: localImageUrl, imageName: files[0].name });
+  startUploadFile = (uid, imageFile, imageName) => {
+    storage
+      .ref(`/users/${uid}/images/${imageName}`)
+      .put(imageFile)
+      .then(() => {
+        storage
+          .ref(`/users/${uid}/images/${imageName}`)
+          .getDownloadURL()
+          .then(imageUrl => {
+            this.setState({ imageUrl, imageFile, imageName });
+          });
+      });
   };
 
-  onRemoveImageClick = () => {
-    this.setState({ image: "", imageName: "" });
+  onImageChange = e => {
+    const imageFile = e.target.files[0];
+    const imageName = imageFile.name;
+    const { uid } = this.props;
+
+    this.startUploadFile(uid, imageFile, imageName);
+  };
+
+  startRemoveFile = uid => {
+    storage
+      .ref(`/users/${uid}/images/${this.state.imageName}`)
+      .delete()
+      .then(() => {
+        this.setState(() => ({ imageUrl: "", imageFile: "", imageName: "" }));
+      });
+  };
+
+  onRemoveImageClick = e => {
+    e.preventDefault();
+    const { uid } = this.props;
+
+    this.startRemoveFile(uid);
   };
 
   onFocusChange = calendarFocused => {
@@ -120,14 +151,15 @@ export default class EventForm extends React.Component {
           numberOfMonths={1}
           minimumNights={0}
         />
-        {this.state.image === "" ? (
+
+        {this.state.imageUrl === "" ? (
           <label htmlFor="image">
             Image
             <input
               type="file"
               id="image"
               accept="image/*"
-              files={this.state.image}
+              files={this.state.imageUrl}
               onChange={this.onImageChange}
             />
           </label>
@@ -152,4 +184,5 @@ EventForm.defaultProps = {
 EventForm.propTypes = {
   event: eventPropTypes.event,
   onSubmit: PropTypes.func.isRequired,
+  uid: PropTypes.string.isRequired,
 };

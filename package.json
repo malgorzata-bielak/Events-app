@@ -9,7 +9,8 @@
     "dev-server": "webpack-dev-server --open --mode development",
     "test": "cross-env NODE_ENV=test jest --config=jest.config.json",
     "start": "node server/server.js",
-    "heroku-postbuild": "yarn run build:prod"
+    "heroku-postbuild": "yarn run build:prod",
+    "lint": "eslint src/**/*.js -f codeframe --color"
   },
   "dependencies": {
     "@babel/core": "^7.4.3",

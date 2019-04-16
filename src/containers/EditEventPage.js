@@ -15,7 +15,7 @@ class EditEventPage extends React.Component {
 
   render() {
     return this.props.event ? (
-      <EventForm event={this.props.event} onSubmit={this.onSubmit} />
+      <EventForm event={this.props.event} uid={this.props.uid} onSubmit={this.onSubmit} />
     ) : (
       <Redirect to="/dashboard" />
     );
@@ -24,6 +24,7 @@ class EditEventPage extends React.Component {
 
 const mapStateToProps = (state, props) => ({
   event: state.events.find(event => event.id === props.match.params.id),
+  uid: state.auth.uid,
 });
 
 EditEventPage.propTypes = {

@@ -13,7 +13,7 @@ export class AddEventPage extends React.Component {
   };
 
   render() {
-    return <EventForm onSubmit={this.onSubmit} />;
+    return <EventForm uid={this.props.uid} onSubmit={this.onSubmit} />;
   }
 }
 
@@ -22,7 +22,11 @@ AddEventPage.propTypes = {
   startAddEvent: PropTypes.func.isRequired,
 };
 
+const mapStateToProps = state => ({
+  uid: state.auth.uid,
+});
+
 export default connect(
-  undefined,
+  mapStateToProps,
   { startAddEvent },
 )(AddEventPage);
