@@ -3,9 +3,10 @@ import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
 import { DateRangePicker } from "react-dates";
 import moment from "moment";
-import uuid from "uuid";
 import PropTypes from "prop-types";
+
 import { eventPropTypes } from "../common/models";
+import { storage } from "../firebase/firebase";
 
 export default class EventForm extends React.Component {
   constructor(props) {
@@ -19,9 +20,9 @@ export default class EventForm extends React.Component {
       organisator: event.organisator || "",
       city: event.city || "",
       category: event.category || "",
-      image: event.image || "",
+      imageUrl: event.imageUrl || "",
+      imageFile: event.imageFile || "",
       imageName: event.imageName || "",
-      id: event.id || uuid(),
       createdAt: moment(event.createdAt) || moment(),
       startDate: moment(event.startDate) || moment(),
       startDateId: "",
@@ -36,14 +37,44 @@ export default class EventForm extends React.Component {
     this.setState({ [id]: value });
   };
 
-  onImageChange = e => {
-    const { files } = e.target;
-    const localImageUrl = window.URL.createObjectURL(files[0]);
-    this.setState({ image: localImageUrl, imageName: files[0].name });
+  startUploadFile = (uid, imageFile, imageName) => {
+    const pathReference = `/users/${uid}/images/${imageName}`;
+
+    storage
+      .ref(pathReference)
+      .put(imageFile)
+      .then(() => {
+        storage
+          .ref(pathReference)
+          .getDownloadURL()
+          .then(imageUrl => {
+            this.setState({ imageUrl, imageFile, imageName });
+          });
+      });
   };
 
-  onRemoveImageClick = () => {
-    this.setState({ image: "", imageName: "" });
+  onImageChange = e => {
+    const imageFile = e.target.files[0];
+    const imageName = imageFile.name;
+    const { uid } = this.props;
+
+    this.startUploadFile(uid, imageFile, imageName);
+  };
+
+  startRemoveFile = uid => {
+    const pathReference = `/users/${uid}/images/${this.state.imageName}`;
+
+    storage
+      .ref(pathReference)
+      .delete()
+      .then(() => {
+        this.setState(() => ({ imageUrl: "", imageFile: "", imageName: "" }));
+      });
+  };
+
+  onRemoveImageClick = e => {
+    e.preventDefault();
+    this.startRemoveFile(this.props.uid);
   };
 
   onFocusChange = calendarFocused => {
@@ -57,17 +88,10 @@ export default class EventForm extends React.Component {
   onSubmit = e => {
     e.preventDefault();
     this.props.onSubmit({
-      title: this.state.title,
-      description: this.state.description,
-      organisator: this.state.organisator,
-      city: this.state.city,
-      category: this.state.category,
+      ...this.state,
       startDate: this.state.startDate.valueOf(),
       endDate: this.state.endDate.valueOf(),
-      image: this.state.image,
-      imageName: this.state.imageName,
       createdAt: this.state.createdAt.valueOf(),
-      id: this.state.id,
     });
   };
 
@@ -129,14 +153,15 @@ export default class EventForm extends React.Component {
           numberOfMonths={1}
           minimumNights={0}
         />
-        {this.state.image === "" ? (
+
+        {!this.state.imageUrl ? (
           <label htmlFor="image">
             Image
             <input
               type="file"
               id="image"
               accept="image/*"
-              files={this.state.image}
+              files={this.state.imageUrl}
               onChange={this.onImageChange}
             />
           </label>
@@ -161,4 +186,5 @@ EventForm.defaultProps = {
 EventForm.propTypes = {
   event: eventPropTypes.event,
   onSubmit: PropTypes.func.isRequired,
+  uid: PropTypes.string.isRequired,
 };

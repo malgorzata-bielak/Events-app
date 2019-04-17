@@ -4,31 +4,32 @@ import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import EventForm from "../components/EventForm";
-import { editEvent } from "../actions/events";
+import { startEditEvent } from "../actions/events";
 import { historyPropTypes } from "../common/models";
 
 class EditEventPage extends React.Component {
   onSubmit = event => {
-    this.props.editEvent(this.props.event.id, event);
-    this.props.history.push("/");
+    this.props.startEditEvent(this.props.event.id, event, this.props.uid);
+    this.props.history.push("/dashboard");
   };
 
   render() {
     return this.props.event ? (
-      <EventForm event={this.props.event} onSubmit={this.onSubmit} />
+      <EventForm event={this.props.event} uid={this.props.uid} onSubmit={this.onSubmit} />
     ) : (
-      <Redirect to="/" />
+      <Redirect to="/dashboard" />
     );
   }
 }
 
 const mapStateToProps = (state, props) => ({
   event: state.events.find(event => event.id === props.match.params.id),
+  uid: state.auth.uid,
 });
 
 EditEventPage.propTypes = {
   ...historyPropTypes,
-  editEvent: PropTypes.func.isRequired,
+  startEditEvent: PropTypes.func.isRequired,
   event: PropTypes.shape({
     id: PropTypes.string,
   }).isRequired,
@@ -36,5 +37,5 @@ EditEventPage.propTypes = {
 
 export default connect(
   mapStateToProps,
-  { editEvent },
+  { startEditEvent },
 )(EditEventPage);

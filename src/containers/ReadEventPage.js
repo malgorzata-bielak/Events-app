@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import { removeEvent } from "../actions/events";
+import { startRemoveEvent } from "../actions/events";
 import { historyPropTypes } from "../common/models";
 import EventBody from "../components/EventBody";
 
@@ -12,8 +12,8 @@ class ReadEventPage extends React.Component {
   };
 
   onRemoveClick = () => {
-    this.props.removeEvent(this.props.event.id);
-    this.props.history.push("/");
+    this.props.startRemoveEvent(this.props.event.id, this.props.uid);
+    this.props.history.push("/dashboard");
   };
 
   render() {
@@ -30,6 +30,7 @@ class ReadEventPage extends React.Component {
 
 const mapStateToProps = (state, props) => ({
   event: state.events.find(event => event.id === props.match.params.id),
+  uid: state.auth.uid,
 });
 
 ReadEventPage.propTypes = {
@@ -37,10 +38,10 @@ ReadEventPage.propTypes = {
   event: PropTypes.shape({
     id: PropTypes.string,
   }).isRequired,
-  removeEvent: PropTypes.func.isRequired,
+  startRemoveEvent: PropTypes.func.isRequired,
 };
 
 export default connect(
   mapStateToProps,
-  { removeEvent },
+  { startRemoveEvent },
 )(ReadEventPage);
