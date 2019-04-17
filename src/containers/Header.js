@@ -5,18 +5,18 @@ import PropTypes from "prop-types";
 
 import { startLogout } from "../actions/auth";
 
-const Header = ({ startLogout: logout }) => (
+const Header = ({ logoutRequestAction }) => (
   <Link to="/dashboard">
     <h1>Event App</h1>
-    <button onClick={logout}>Logout</button>
+    <button onClick={logoutRequestAction}>Logout</button>
   </Link>
 );
 
 Header.propTypes = {
-  startLogout: PropTypes.func.isRequired,
+  logoutRequestAction: PropTypes.func.isRequired,
 };
 
 export default connect(
   undefined,
-  { startLogout },
+  { logoutRequestAction: startLogout },
 )(Header);
