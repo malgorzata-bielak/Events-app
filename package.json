@@ -48,6 +48,7 @@
     "babel-eslint": "^10.0.1",
     "cross-env": "5.2.0",
     "dotenv": "7.0.0",
+    "dotenv-webpack": "^1.7.0",
     "enzyme": "3.9.0",
     "enzyme-adapter-react-16": "1.11.2",
     "enzyme-to-json": "3.3.5",

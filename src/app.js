@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 
-import { login, logout } from "./actions/auth";
+import { loginRequest, logoutRequest } from "./actions/auth";
 import configureStore from "./store/configureStore";
 import AppRouter, { history } from "./routers/AppRouter";
 import { firebase } from "./firebase/firebase";
@@ -27,15 +27,15 @@ const renderApp = () => {
 
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
-    store.dispatch(login(user.uid));
-    store.dispatch(startSetEvents()).then(() => {
+    store.dispatch(loginRequest(user.uid));
+    store.dispatch(startSetEvents(user.uid)).then(() => {
       renderApp();
       if (history.location.pathname === "/") {
         history.push("/dashboard");
       }
     });
   } else {
-    store.dispatch(logout());
+    store.dispatch(logoutRequest());
     renderApp();
     history.push("/");
   }

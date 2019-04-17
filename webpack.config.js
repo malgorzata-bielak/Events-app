@@ -1,14 +1,17 @@
 const path = require("path");
+const Dotenv = require("dotenv-webpack");
 
 module.exports = env => {
   const isProduction = env === "production";
 
   return {
     entry: "./src/app.js",
+
     output: {
       path: path.join(__dirname, "public", "dist"),
       filename: "bundle.js",
     },
+
     module: {
       rules: [
         {
@@ -24,7 +27,15 @@ module.exports = env => {
         },
       ],
     },
+
+    plugins: [
+      new Dotenv({
+        path: "./.env.development",
+      }),
+    ],
+
     devtool: isProduction ? "source-map" : "inline-source-map",
+
     devServer: {
       contentBase: path.join(__dirname, "public"),
       historyApiFallback: true,

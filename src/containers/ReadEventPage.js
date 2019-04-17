@@ -12,7 +12,7 @@ class ReadEventPage extends React.Component {
   };
 
   onRemoveClick = () => {
-    this.props.startRemoveEvent(this.props.event.id);
+    this.props.startRemoveEvent(this.props.event.id, this.props.uid);
     this.props.history.push("/dashboard");
   };
 
@@ -30,6 +30,7 @@ class ReadEventPage extends React.Component {
 
 const mapStateToProps = (state, props) => ({
   event: state.events.find(event => event.id === props.match.params.id),
+  uid: state.auth.uid,
 });
 
 ReadEventPage.propTypes = {

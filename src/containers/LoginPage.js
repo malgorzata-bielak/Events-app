@@ -4,18 +4,18 @@ import PropTypes from "prop-types";
 
 import { startLogin } from "../actions/auth";
 
-const LoginPage = ({ startLogin: login }) => (
-  <div>
+const LoginPage = ({ loginRequestAction }) => (
+  <>
     <h1>Event App</h1>
-    <button onClick={login}>Login with Google</button>
-  </div>
+    <button onClick={loginRequestAction}>Login with Google</button>
+  </>
 );
 
 LoginPage.propTypes = {
-  startLogin: PropTypes.func.isRequired,
+  loginRequestAction: PropTypes.func.isRequired,
 };
 
 export default connect(
   undefined,
-  { startLogin },
+  { loginRequestAction: startLogin },
 )(LoginPage);

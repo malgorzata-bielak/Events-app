@@ -8,7 +8,7 @@ import { historyPropTypes } from "../common/models";
 
 export class AddEventPage extends React.Component {
   onSubmit = event => {
-    this.props.startAddEvent(event);
+    this.props.startAddEvent(event, this.props.uid);
     this.props.history.push("/dashboard");
   };
 

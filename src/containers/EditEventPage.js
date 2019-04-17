@@ -9,7 +9,7 @@ import { historyPropTypes } from "../common/models";
 
 class EditEventPage extends React.Component {
   onSubmit = event => {
-    this.props.startEditEvent(this.props.event.id, event);
+    this.props.startEditEvent(this.props.event.id, event, this.props.uid);
     this.props.history.push("/dashboard");
   };
 

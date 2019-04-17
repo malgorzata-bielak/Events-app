@@ -5,10 +5,8 @@ export const setEvents = events => ({
   events,
 });
 
-export const startSetEvents = () => (dispatch, getState) => {
-  const { uid } = getState().auth;
-
-  return database
+export const startSetEvents = uid => dispatch =>
+  database
     .ref(`users/${uid}/events`)
     .once("value")
     .then(snapshot => {
@@ -16,29 +14,25 @@ export const startSetEvents = () => (dispatch, getState) => {
 
       snapshot.forEach(childSnapshot => {
         events.push({
-          id: childSnapshot.key,
           ...childSnapshot.val(),
+          id: childSnapshot.key,
         });
       });
       dispatch(setEvents(events));
     });
-};
 
 export const addEvent = event => ({
   type: "ADD_EVENT",
   event,
 });
 
-export const startAddEvent = eventData => (dispatch, getState) => {
-  const { uid } = getState().auth;
-
-  return database
+export const startAddEvent = (eventData, uid) => dispatch =>
+  database
     .ref(`users/${uid}/events`)
     .push(eventData)
     .then(ref => {
-      dispatch(addEvent({ id: ref.key, ...eventData }));
+      dispatch(addEvent({ ...eventData, id: ref.key }));
     });
-};
 
 export const editEvent = (id, updates) => ({
   type: "EDIT_EVENT",
@@ -46,29 +40,23 @@ export const editEvent = (id, updates) => ({
   updates,
 });
 
-export const startEditEvent = (id, updates) => (dispatch, getState) => {
-  const { uid } = getState().auth;
-
-  return database
+export const startEditEvent = (id, updates, uid) => dispatch =>
+  database
     .ref(`users/${uid}/events/${id}`)
     .update(updates)
     .then(() => {
       dispatch(editEvent(id, updates));
     });
-};
 
 export const removeEvent = (id = {}) => ({
   type: "REMOVE_EVENT",
   id,
 });
 
-export const startRemoveEvent = id => (dispatch, getState) => {
-  const { uid } = getState().auth;
-
-  return database
+export const startRemoveEvent = (id, uid) => dispatch =>
+  database
     .ref(`users/${uid}/events/${id}`)
     .remove()
     .then(() => {
       dispatch(removeEvent(id));
     });
-};

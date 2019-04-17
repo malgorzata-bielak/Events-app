@@ -38,12 +38,14 @@ export default class EventForm extends React.Component {
   };
 
   startUploadFile = (uid, imageFile, imageName) => {
+    const pathReference = `/users/${uid}/images/${imageName}`;
+
     storage
-      .ref(`/users/${uid}/images/${imageName}`)
+      .ref(pathReference)
       .put(imageFile)
       .then(() => {
         storage
-          .ref(`/users/${uid}/images/${imageName}`)
+          .ref(pathReference)
           .getDownloadURL()
           .then(imageUrl => {
             this.setState({ imageUrl, imageFile, imageName });
@@ -60,8 +62,10 @@ export default class EventForm extends React.Component {
   };
 
   startRemoveFile = uid => {
+    const pathReference = `/users/${uid}/images/${this.state.imageName}`;
+
     storage
-      .ref(`/users/${uid}/images/${this.state.imageName}`)
+      .ref(pathReference)
       .delete()
       .then(() => {
         this.setState(() => ({ imageUrl: "", imageFile: "", imageName: "" }));
@@ -70,9 +74,7 @@ export default class EventForm extends React.Component {
 
   onRemoveImageClick = e => {
     e.preventDefault();
-    const { uid } = this.props;
-
-    this.startRemoveFile(uid);
+    this.startRemoveFile(this.props.uid);
   };
 
   onFocusChange = calendarFocused => {
@@ -152,7 +154,7 @@ export default class EventForm extends React.Component {
           minimumNights={0}
         />
 
-        {this.state.imageUrl === "" ? (
+        {!this.state.imageUrl ? (
           <label htmlFor="image">
             Image
             <input
