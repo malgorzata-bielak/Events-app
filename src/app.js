@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 
+import "./styles.css";
 import { loginRequest, logoutRequest } from "./actions/auth";
 import configureStore from "./store/configureStore";
 import AppRouter, { history } from "./routers/AppRouter";
