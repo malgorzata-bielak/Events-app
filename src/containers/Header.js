@@ -7,14 +7,17 @@ import styled from "@emotion/styled";
 import { startLogout } from "../actions/auth";
 
 const HeaderBar = styled.div`
-  align-items: flex-start;
   background: url("/images/event-photo-bar.jpg");
   background-position: center center;
   background-size: cover;
+  height: 120px;
+`;
+
+const Container = styled.div`
   display: flex;
-  height: 130px;
   justify-content: space-between;
-  padding: 20px 20px 0;
+  max-width: 90vw;
+  margin: 0 auto;
 `;
 
 const StyledLink = styled(Link)`
@@ -33,21 +36,30 @@ const H1 = styled.h1`
 const Button = styled.button`
   background-color: transparent;
   border: 3px solid white;
-  border-radius: 5px;
+  border-radius: 8px;
   color: white;
   font-family: Helvetica, Arial, sans-serif;
+  font-size: 16px;
   font-weight: bold;
-  margin-top: 10px;
-  padding: 8px 10px;
+  margin-top: 30px;
+  padding: 6px 8px;
   text-decoration: none;
+  height: 40px;
+  width: 80;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Header = ({ logoutRequestAction }) => (
   <HeaderBar>
-    <StyledLink to="/dashboard">
-      <H1>Event App</H1>
-    </StyledLink>
-    <Button onClick={logoutRequestAction}>logout</Button>
+    <Container>
+      <StyledLink to="/dashboard">
+        <H1>Event App</H1>
+      </StyledLink>
+      <Button onClick={logoutRequestAction}>logout</Button>
+    </Container>
   </HeaderBar>
 );
 

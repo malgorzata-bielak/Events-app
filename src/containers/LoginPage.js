@@ -33,7 +33,8 @@ const H1 = styled.h1`
   color: #224067;
   font-family: "Permanent Marker", Arial, sans-serif, cursive;
   font-size: 55px;
-  margin: 0 0 55px;
+  line-height: 1.2;
+  margin: 0 0 45px;
   overflow-wrap: break-word;
   text-align: center;
 `;
@@ -44,6 +45,10 @@ const Button = styled.button`
   color: white;
   padding: 8px 8px;
   text-decoration: none;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const LoginPage = ({ loginRequestAction }) => (
