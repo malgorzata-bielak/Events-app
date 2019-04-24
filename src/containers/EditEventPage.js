@@ -15,7 +15,12 @@ class EditEventPage extends React.Component {
 
   render() {
     return this.props.event ? (
-      <EventForm event={this.props.event} uid={this.props.uid} onSubmit={this.onSubmit} />
+      <EventForm
+        event={this.props.event}
+        uid={this.props.uid}
+        onSubmit={this.onSubmit}
+        history={this.props.history}
+      />
     ) : (
       <Redirect to="/dashboard" />
     );
