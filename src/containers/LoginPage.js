@@ -5,9 +5,9 @@ import styled from "@emotion/styled";
 
 import { startLogin } from "../actions/auth";
 
-const Container = styled.div`
+const LoginContainer = styled.div`
   align-items: center;
-  background: url("/images/event-photo.jpg");
+  background: url("/images/event2-photo.jpg");
   background-size: cover;
   box-sizing: border-box;
   display: flex;
@@ -18,7 +18,7 @@ const Container = styled.div`
 
 const LoginBox = styled.div`
   align-items: center;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.8);
   border-radius: 2px;
   display: flex;
   flex-direction: column;
@@ -39,25 +39,29 @@ const H1 = styled.h1`
   text-align: center;
 `;
 
-const Button = styled.button`
+const LoginButton = styled.button`
   background: #2273cf;
   border: none;
   color: white;
+  font-family: "Open Sans";
+  font-size: 16px;
   padding: 8px 8px;
   text-decoration: none;
 
   &:hover {
+    background-color: #23c3e3;
+    border: 1px solid #23c3e3;
     cursor: pointer;
   }
 `;
 
 const LoginPage = ({ loginRequestAction }) => (
-  <Container>
+  <LoginContainer>
     <LoginBox>
       <H1>Event App</H1>
-      <Button onClick={loginRequestAction}>Login with Google</Button>
+      <LoginButton onClick={loginRequestAction}>Login with Google</LoginButton>
     </LoginBox>
-  </Container>
+  </LoginContainer>
 );
 
 LoginPage.propTypes = {

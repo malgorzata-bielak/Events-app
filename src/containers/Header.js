@@ -6,18 +6,19 @@ import styled from "@emotion/styled";
 
 import { startLogout } from "../actions/auth";
 
-const HeaderBar = styled.div`
-  background: url("/images/event-photo-bar.jpg");
+const HeaderBackground = styled.div`
+  background: url("/images/event2-photo.jpg");
   background-position: center center;
   background-size: cover;
-  height: 120px;
+  height: 130px;
+  width: 100%;
 `;
 
-const Container = styled.div`
+const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  max-width: 90vw;
   margin: 0 auto;
+  max-width: 80vw;
 `;
 
 const StyledLink = styled(Link)`
@@ -25,7 +26,7 @@ const StyledLink = styled(Link)`
 
   color: white;
   font-family: "Permanent Marker", Arial, sans-serif, cursive;
-  font-size: 28px;
+  font-size: 30px;
   text-decoration: none;
 `;
 
@@ -33,34 +34,37 @@ const H1 = styled.h1`
   margin: 0;
 `;
 
-const Button = styled.button`
-  background-color: transparent;
+const LogoutButton = styled.button`
+  background-color: #074073;
   border: 3px solid white;
   border-radius: 8px;
   color: white;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-weight: bold;
-  margin-top: 30px;
+  height: 40px;
+  margin-top: 25px;
+  outline: none;
   padding: 6px 8px;
   text-decoration: none;
-  height: 40px;
   width: 80;
 
   &:hover {
+    border-color: #c03aba;
+    color: #c03aba;
     cursor: pointer;
   }
 `;
 
 const Header = ({ logoutRequestAction }) => (
-  <HeaderBar>
-    <Container>
+  <HeaderBackground>
+    <HeaderContainer>
       <StyledLink to="/dashboard">
         <H1>Event App</H1>
       </StyledLink>
-      <Button onClick={logoutRequestAction}>logout</Button>
-    </Container>
-  </HeaderBar>
+      <LogoutButton onClick={logoutRequestAction}>logout</LogoutButton>
+    </HeaderContainer>
+  </HeaderBackground>
 );
 
 Header.propTypes = {

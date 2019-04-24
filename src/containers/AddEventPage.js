@@ -13,7 +13,7 @@ export class AddEventPage extends React.Component {
   };
 
   render() {
-    return <EventForm uid={this.props.uid} onSubmit={this.onSubmit} />;
+    return <EventForm uid={this.props.uid} onSubmit={this.onSubmit} history={this.props.history} />;
   }
 }
 
