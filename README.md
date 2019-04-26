@@ -2,6 +2,8 @@
 
 Events-app is a place to store information about upcoming events of our interest.
 
+Application is still developed.
+
 ## Installation
 
 Install packages locally:
