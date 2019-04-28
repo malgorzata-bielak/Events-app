@@ -24,7 +24,6 @@ module.exports = env => {
         },
         {
           test: /\.css$/,
-          // use: [MiniCssExtractPlugin.loader, "css-loader"],
           use: [isProduction ? MiniCssExtractPlugin.loader : "style-loader", "css-loader"],
         },
       ],
@@ -33,6 +32,7 @@ module.exports = env => {
     plugins: [
       new Dotenv({
         path: "./.env.development",
+        systemvars: true,
       }),
       new MiniCssExtractPlugin({
         filename: "styles.css",
