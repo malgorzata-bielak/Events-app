@@ -6,36 +6,96 @@ import styled from "@emotion/styled";
 import { startRemoveEvent } from "../actions/events";
 import { historyPropTypes } from "../common/models";
 import EventBody from "../components/EventBody";
-import { Button } from "./Filters";
-import { RemoveButton } from "../components/EventForm";
+import { Button, RemoveButton } from "../components/EventForm";
 
 const Container = styled.div`
+  align-items: center;
   background: white;
   display: flex;
+  flex-direction: column;
   margin: 40px auto;
+  max-width: 80vw;
   padding: 0 0 30px;
-  width: 60vw;
+  position: relative;
+
+  @media (min-width: 1050px) {
+    align-items: flex-start;
+    flex-direction: row;
+  }
+
+  @media (min-width: 1150px) {
+    width: 920px;
+  }
 `;
+
+const Description = styled.div`
+  margin: 0 auto 120px;
+  width: 100%;
+
+  @media (min-width: 377px) {
+    margin: 0 auto 60px;
+  }
+
+  @media (min-width: 478px) {
+    width: 90%;
+  }
+
+  @media (min-width: 1050px) {
+    max-width: 540px;
+    min-width: 460px;
+  }
+
+  p {
+    @media (min-width: 1050px) {
+      border-left: 1px solid #dbdbdb;
+    }
+  }
+`;
+
 const DescriptionHeader = styled.p`
-  border-left: 1px solid #dbdbdb;
   font-weight: bold;
   margin: 30px 0 0;
   padding: 0 30px;
 `;
 
 const P = styled.p`
-  border-left: 1px solid #dbdbdb;
+  border: none;
   margin: 0 0 45px 0;
   min-height: 360px;
   overflow-wrap: break-word;
   padding: 20px 30px 0;
-  width: 540px;
+  width: 100%;
 `;
 
 const Buttons = styled.div`
+  bottom: 0;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-evenly;
-  margin: 60px 20px 0;
+  left: 0;
+  margin: 0 auto 40px;
+  position: absolute;
+  right: 0;
+  width: 50vw;
+
+  button {
+    margin: 7px 0;
+  }
+
+  @media (min-width: 377px) {
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    width: 280px;
+
+    button {
+      margin: 0 7px;
+    }
+  }
+
+  @media (min-width: 1050px) {
+    bottom: initial;
+    position: initial;
+  }
 `;
 
 class ReadEventPage extends React.Component {
@@ -58,10 +118,10 @@ class ReadEventPage extends React.Component {
             <RemoveButton onClick={this.onRemoveClick}>Remove event</RemoveButton>
           </Buttons>
         </div>
-        <div>
+        <Description>
           <DescriptionHeader>Event description:</DescriptionHeader>
           <P>{this.props.event.description}</P>
-        </div>
+        </Description>
       </Container>
     );
   }

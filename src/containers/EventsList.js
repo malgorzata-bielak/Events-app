@@ -8,39 +8,60 @@ import visibleEvents from "../selectors/visibleEvents";
 import { eventPropTypes } from "../common/models";
 
 const NoEventsContainer = styled.div`
-  background: #d3f3f8;
   display: flex;
   justify-content: center;
-  margin: 40px auto 0;
-  padding: 15px 0;
-  width: 56vw;
+  margin-bottom: 90px;
+`;
 
-  p {
-    font-style: oblique;
-  }
+const P = styled.p`
+  color: white;
+  font-style: oblique;
+  margin: 0px;
+  text-align: center;
 `;
 
 const EventsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 0 auto 40px;
+  max-width: 80vw;
+`;
+
+const EventsGrid = styled.div`
   display: grid;
-  grid-auto-rows: 427.6px;
+  grid-auto-rows: auto;
   grid-column-gap: 40px;
   grid-row-gap: 40px;
-  grid-template-columns: 381.6px 381.6px 381.6px;
-  margin: 0 auto 40px;
-  width: 80vw;
+  grid-template-columns: auto;
+  width: 100%;
+
+  @media (min-width: 478px) {
+    grid-auto-rows: 430px;
+    width: auto;
+  }
+
+  @media (min-width: 880px) {
+    grid-template-columns: 381.6px 381.6px;
+  }
+
+  @media (min-width: 1300px) {
+    grid-template-columns: 381.6px 381.6px 381.6px;
+  }
 `;
 
 const EventsList = ({ events }) => (
   <>
     {events.length === 0 ? (
       <NoEventsContainer>
-        <p>No events</p>
+        <P>No events to show</P>
       </NoEventsContainer>
     ) : (
       <EventsContainer>
-        {events.map(event => (
-          <EventItem key={event.id} {...event} />
-        ))}
+        <EventsGrid>
+          {events.map(event => (
+            <EventItem key={event.id} {...event} />
+          ))}
+        </EventsGrid>
       </EventsContainer>
     )}
   </>

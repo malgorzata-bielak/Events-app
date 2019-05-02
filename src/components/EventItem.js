@@ -4,13 +4,14 @@ import styled from "@emotion/styled";
 
 import EventBody from "./EventBody";
 
-const EventBox = styled(Link)`
+const EventItemBox = styled(Link)`
   background: white;
   border: 1px solid #dbdbdb;
   color: black;
   display: flex;
   justify-content: center;
   text-decoration: none;
+  width: 100%;
 
   &:hover {
     background: #eee;
@@ -18,9 +19,9 @@ const EventBox = styled(Link)`
 `;
 
 const EventItem = event => (
-  <EventBox to={`read/${event.id}`}>
+  <EventItemBox to={`read/${event.id}`}>
     <EventBody {...event} />
-  </EventBox>
+  </EventItemBox>
 );
 
 export default EventItem;

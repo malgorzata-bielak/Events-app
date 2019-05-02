@@ -5,14 +5,25 @@ import styled from "@emotion/styled";
 
 const EventBox = styled.div`
   background: white;
-  margin: 30px;
-  width: 320px;
+  margin: 20px;
+
+  @media (min-width: 478px) {
+    margin: 30px;
+    width: 320px;
+  }
+
+  @media (min-width: 1050px) {
+    position: relative;
+  }
 `;
 
 const Img = styled.img`
-  height: 200px;
   margin: 0 0 10px 0;
   width: 100%;
+
+  @media (min-width: 478px) {
+    height: 220px;
+  }
 `;
 
 const DetailsBox = styled.div`
@@ -24,8 +35,8 @@ const DetailsBox = styled.div`
 
 const Date = styled.p`
   color: #2273cf;
-  font-weight: bold;
   flex-shrink: 0;
+  font-weight: bold;
   margin: 6px 0 0;
   width: 70px;
 `;
@@ -33,7 +44,6 @@ const Date = styled.p`
 const TitleBox = styled.div`
   flex-shrink: 2;
   padding-left: 20px;
-  width: 210px;
 
   * {
     margin: 0 0 5px;
@@ -48,6 +58,10 @@ const TitleBox = styled.div`
 
   p:last-of-type {
     margin: 0;
+  }
+
+  @media (min-width: 478px) {
+    width: 210px;
   }
 `;
 

@@ -14,10 +14,17 @@ import {
 import { historyPropTypes } from "../common/models";
 
 const BarBox = styled.div`
+  align-items: center;
   display: flex;
-  justify-content: center;
-  margin: 60px auto 40px;
+  flex-direction: column;
+  margin: 40px auto 40px;
   max-width: 80vw;
+
+  @media (min-width: 766px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 `;
 
 const textField = css`
@@ -25,35 +32,57 @@ const textField = css`
   font-family: "Open Sans";
   font-size: 16px;
   height: 45px;
-  margin-right: 25px;
+  margin-bottom: 15px;
+  max-width: 383px;
   outline: none;
+  text-align: center;
+  text-align-last: center;
+  width: 100%;
 `;
 
 const Input = styled.input`
   ${textField}
   padding-left: 10px;
-  width: 300px;
+
+  @media (min-width: 766px) {
+    margin: 7px;
+    text-align: left;
+    text-align-last: left;
+    width: 300px;
+  }
 `;
 
 const Select = styled.select`
   ${textField}
   padding: 0 5px;
+
+  @media (min-width: 766px) {
+    margin: 7px;
+    width: 180px;
+  }
 `;
 
-export const Button = styled.button`
+const CreateButton = styled.button`
   background-color: #c03aba;
   border: 1px solid #c03aba;
   color: white;
   font-family: "Open Sans";
   font-size: 16px;
   height: 45px;
+  max-width: 383px;
   outline: none;
   padding: 0 8px;
+  width: 100%;
 
   &:hover {
-    cursor: pointer;
     background-color: #a1309c;
     border: 1px solid #a1309c;
+    cursor: pointer;
+  }
+
+  @media (min-width: 766px) {
+    margin: 7px;
+    width: 113px;
   }
 `;
 
@@ -118,7 +147,7 @@ class Filters extends React.Component {
             <option value="newest">Newest</option>
             <option value="closest">Closest</option>
           </Select>
-          <Button onClick={this.onCreateClick}>Create event</Button>
+          <CreateButton onClick={this.onCreateClick}>Create event</CreateButton>
         </BarBox>
       </>
     );

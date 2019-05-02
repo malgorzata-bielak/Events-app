@@ -10,20 +10,18 @@ import { css } from "@emotion/core";
 
 import { eventPropTypes, historyPropTypes } from "../common/models";
 import { storage } from "../firebase/firebase";
-import { Button } from "../containers/Filters";
-
-const columnView = css`
-  align-items: flex-start;
-  display: flex;
-  flex-direction: column;
-`;
 
 const Container = styled.div`
-  ${columnView}
   background: white;
+  display: flex;
+  flex-direction: column;
   margin: 40px auto 40px;
   padding: 30px;
-  width: 50vw;
+  width: 80vw;
+
+  @media (min-width: 910px) {
+    width: 727px;
+  }
 `;
 
 const FormHeader = styled.h2`
@@ -32,11 +30,48 @@ const FormHeader = styled.h2`
   margin: 0 0 40px;
 `;
 
+const SelectContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 433px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    label:nth-of-type(2) {
+      margin-right: 15px;
+    }
+  }
+
+  @media (min-width: 588px) {
+    label:first-of-type {
+      margin-right: 15px;
+    }
+  }
+`;
+
 const Label = styled.label`
-  ${columnView}
   color: #2273cf;
+  display: flex;
+  flex-direction: column;
   margin-bottom: 20px;
-  width: 100%;
+`;
+
+const PickerLabel = styled(Label)`
+  > div {
+    margin-top: 4px;
+  }
+`;
+
+const Select = styled.select`
+  border: 1px solid ${props => (props.missing ? "#c03aba" : "#dbdbdb")};
+  flex-grow: 1;
+  font-family: "Open Sans";
+  font-size: 16px;
+  height: 48px;
+  margin-top: 4px;
+  outline: none;
+  padding: 0 6px;
 `;
 
 const textField = css`
@@ -63,85 +98,83 @@ const TextArea = styled.textarea`
   resize: none;
 `;
 
-const SelectContainer = styled.div`
-  align-items: center;
-  display: flex;
-  width: 100%;
-
-  label:first-child {
-    margin-right: 15px;
-  }
-`;
-
-const PickerLabel = styled(Label)`
-  width: 286px;
-
-  > div {
-    margin-top: 4px;
-  }
-`;
-
-const SelectBox = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
-const Select = styled.select`
-  border: 1px solid ${props => (props.missing ? "#c03aba" : "#dbdbdb")};
-  flex-grow: 1;
-  font-family: "Open Sans";
-  font-size: 16px;
-  height: 48px;
-  margin-top: 4px;
-  outline: none;
-  padding: 0 6px;
-`;
-
-const imageInfo = css`
-  align-items: center;
-  display: flex;
-  margin-top: 5px;
-`;
-
 const NoImageBox = styled.label`
-  ${imageInfo}
   color: #2273cf;
 
   input {
     color: black;
     font-family: "Open Sans";
     font-size: 16px;
-    margin-left: 15px;
+    margin-top: 5px;
     outline: none;
+    overflow-wrap: break-word;
+    width: 100%;
+  }
+
+  @media (min-width: 460px) {
+    align-items: center;
+    display: flex;
+
+    input {
+      margin-left: 15px;
+    }
   }
 `;
 
 const ImageBox = styled.div`
-  ${imageInfo}
+  @media (min-width: 460px) {
+    align-items: center;
+    display: flex;
+
+    p {
+      margin: 13px 15px 13px 0;
+    }
+  }
 `;
 
 const ImageP = styled.p`
   color: #2273cf;
-  margin-right: 15px;
+  margin: 0;
 `;
 
 const ImageTitle = styled.p`
   font-style: oblique;
   font-size: 14px;
   max-height: 20px;
-  margin-right: 15px;
+  margin: 5px 0px 10px 0;
   max-width: 500px;
   overflow: hidden;
+  padding-right: 5px;
   text-overflow: ellipsis;
 `;
 
-const SubmitButton = styled(Button)`
-  margin: 40px 15px 40px 0;
+const Buttons = styled.div`
+  display: flex;
+  height: 45px;
+  margin: 40px 0 20px;
+`;
+
+export const Button = styled.button`
+  background-color: #c03aba;
+  border: 1px solid #c03aba;
+  color: white;
+  font-family: "Open Sans";
+  font-size: 16px;
+  height: 45px;
+  max-width: 383px;
+  outline: none;
+  padding: 0 8px;
+  width: 100%;
+
+  @media (min-width: 377px) {
+    width: 113px;
+  }
 `;
 
 export const RemoveButton = styled(Button)`
   background-color: #7c7979;
   border-color: #7c7979;
+  flex-shrink: 0;
 
   &:hover {
     background-color: #5f5d5d;
@@ -152,10 +185,15 @@ export const RemoveButton = styled(Button)`
 const CancelButton = styled(Button)`
   background-color: #2273cf;
   border-color: #2273cf;
+  margin-top: 15px;
 
   &:hover {
     background-color: #1c60ad;
     border-color: #1c60ad;
+  }
+
+  @media (min-width: 377px) {
+    margin: 0 0 0 15px;
   }
 `;
 
@@ -293,41 +331,39 @@ export default class EventForm extends React.Component {
               />
             </PickerLabel>
 
-            <SelectBox>
-              <Label>
-                Location:
-                <Select
-                  missing={this.state.missingInfo && !this.state.city}
-                  id="city"
-                  value={this.state.city}
-                  onChange={this.onChange}
-                >
-                  <option value="">Select city</option>
-                  <option value="Cracow">Cracow</option>
-                  <option value="Wroclaw">Wroclaw</option>
-                  <option value="Warsaw">Warsaw</option>
-                  <option value="Poznan">Poznan</option>
-                  <option value="Gdansk">Gdansk</option>
-                </Select>
-              </Label>
+            <Label>
+              Location:
+              <Select
+                missing={this.state.missingInfo && !this.state.city}
+                id="city"
+                value={this.state.city}
+                onChange={this.onChange}
+              >
+                <option value="">Select city</option>
+                <option value="Cracow">Cracow</option>
+                <option value="Wroclaw">Wroclaw</option>
+                <option value="Warsaw">Warsaw</option>
+                <option value="Poznan">Poznan</option>
+                <option value="Gdansk">Gdansk</option>
+              </Select>
+            </Label>
 
-              <Label>
-                Category:
-                <Select
-                  missing={this.state.missingInfo && !this.state.category}
-                  id="category"
-                  value={this.state.category}
-                  onChange={this.onChange}
-                >
-                  <option value="">Select category</option>
-                  <option value="Music">Music</option>
-                  <option value="Arts">Arts</option>
-                  <option value="Business">Business</option>
-                  <option value="Sport">Sport</option>
-                  <option value="Food">Food</option>
-                </Select>
-              </Label>
-            </SelectBox>
+            <Label>
+              Category:
+              <Select
+                missing={this.state.missingInfo && !this.state.category}
+                id="category"
+                value={this.state.category}
+                onChange={this.onChange}
+              >
+                <option value="">Select category</option>
+                <option value="Music">Music</option>
+                <option value="Arts">Arts</option>
+                <option value="Business">Business</option>
+                <option value="Sport">Sport</option>
+                <option value="Food">Food</option>
+              </Select>
+            </Label>
           </SelectContainer>
 
           <Label htmlFor="title">
@@ -382,13 +418,13 @@ export default class EventForm extends React.Component {
             </ImageBox>
           )}
 
-          <div>
-            <SubmitButton disabled={this.state.isImageLoading}>
+          <Buttons>
+            <Button disabled={this.state.isImageLoading}>
               {!this.props.event.id ? "Add event" : "Save changes"}
-            </SubmitButton>
+            </Button>
 
             <CancelButton onClick={this.onCancel}>Cancel</CancelButton>
-          </div>
+          </Buttons>
         </Container>
       </form>
     );

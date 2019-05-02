@@ -10,8 +10,7 @@ const HeaderBackground = styled.div`
   background: url("/images/event2-photo.jpg");
   background-position: center center;
   background-size: cover;
-  height: 130px;
-  width: 100%;
+  height: 140px;
 `;
 
 const HeaderContainer = styled.div`
@@ -26,12 +25,20 @@ const StyledLink = styled(Link)`
 
   color: white;
   font-family: "Permanent Marker", Arial, sans-serif, cursive;
-  font-size: 30px;
+  font-size: 26px;
+  margin-top: 5px;
   text-decoration: none;
+
+  @media (min-width: 560px) {
+    font-size: 30px;
+  }
 `;
 
 const H1 = styled.h1`
+  line-height: 1.2;
+  overflow-wrap: break-word;
   margin: 0;
+  padding-right: 40px;
 `;
 
 const LogoutButton = styled.button`
@@ -43,7 +50,7 @@ const LogoutButton = styled.button`
   font-size: 16px;
   font-weight: bold;
   height: 40px;
-  margin-top: 25px;
+  margin-top: 20px;
   outline: none;
   padding: 6px 8px;
   text-decoration: none;

@@ -45,6 +45,7 @@ const LoginButton = styled.button`
   color: white;
   font-family: "Open Sans";
   font-size: 16px;
+  outline: none;
   padding: 8px 8px;
   text-decoration: none;
 
